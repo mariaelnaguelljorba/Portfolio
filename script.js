@@ -53,16 +53,16 @@ document.querySelectorAll('.hello-wrap').forEach(el=>{
   for(let i=0;i<12;i++)mk(el,i%2?rnd(82,96):rnd(2,16),rnd(4,88),rnd(24,52),pick(C),true);
   for(let i=0;i<10;i++)mk(el,rnd(0,97),rnd(0,92),rnd(8,20),pick(C),false);
 });
-// slider automàtic de la portada amb fletxes
+// slider automàtic de la portada
 document.querySelectorAll('.show').forEach(w=>{
-  const sl=[...w.querySelectorAll('.sh')];let i=0,timer;
-  const go=k=>{i=(k+sl.length)%sl.length;sl.forEach((s,j)=>s.classList.toggle('on',j===i))};
+  const sl=[...w.querySelectorAll('.sh')],dots=w.querySelector('.dots');
+  let i=0,timer;
+  const go=k=>{i=(k+sl.length)%sl.length;sl.forEach((s,j)=>s.classList.toggle('on',j===i));if(dots)[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i))};
   const play=()=>{clearInterval(timer);timer=setInterval(()=>go(i+1),4500)};
-  const l=w.querySelector('.arr.l'),r=w.querySelector('.arr.r');
-  if(l)l.onclick=()=>{go(i-1);play()};
-  if(r)r.onclick=()=>{go(i+1);play()};
+  if(dots)sl.forEach((_,k)=>{const b=document.createElement('button');b.setAttribute('aria-label','Slide '+(k+1));b.onclick=()=>{go(k);play()};dots.appendChild(b)});
   w.onmouseenter=()=>clearInterval(timer);w.onmouseleave=play;
   go(0);play();
+});
 });
 // estela del cursor (només amb ratolí)
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&matchMedia('(hover:hover)').matches){

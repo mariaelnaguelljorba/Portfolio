@@ -126,3 +126,42 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;paddin
 .card.big:hover .d,.card.big:focus-visible .d{opacity:1}
 /* ===== resume PDF ===== */
 .pdf{display:block;width:100%;height:85vh;min-height:600px;border:0;border-radius:10px;background:#fff;margin:20px 0 10px}
+/* ===== ACTUALITZACIÓ ===== */
+header nav{margin-left:auto}
+/* botó mode fosc */
+.tg{width:40px;height:40px;margin-left:8px;border-radius:50%;border:2px solid var(--mut);background:none;color:var(--mut);cursor:pointer;display:grid;place-items:center;flex:none;padding:0;transition:.2s}
+.tg:hover{color:var(--pur);border-color:var(--pur);transform:rotate(18deg)}
+.tg svg{width:20px;height:20px}
+/* botons de la portada, més grans */
+.pills{gap:16px;padding:46px 3vw}
+.pills a{padding:20px 40px;font-size:1.1rem;letter-spacing:.06em}
+@media(max-width:700px){.pills a{padding:14px 24px;font-size:.9rem}}
+/* slider més curt, amb fletxes */
+.show{height:clamp(300px,46vh,460px)}
+.sh .cap{top:50%;bottom:auto;transform:translateY(-50%)}
+.sh .n,.band,.dots{display:none}
+.arr{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:58px;height:58px;border-radius:50%;border:2px solid #fff;background:rgba(15,8,25,.25);color:#fff;display:grid;place-items:center;cursor:pointer;padding:0;transition:.25s;backdrop-filter:blur(3px)}
+.arr svg{width:24px;height:24px}
+.arr.l{left:22px}.arr.r{right:22px}
+.arr:hover{background:var(--pur);border-color:var(--pur);transform:translateY(-50%) scale(1.1)}
+/* Hello amb avatar gran i estrelles als costats */
+.hello-wrap{position:relative;overflow:hidden;padding:30px 0}
+.hello{max-width:1100px;gap:56px}
+.hello>img{width:min(300px,38vw);height:min(300px,38vw);box-shadow:0 0 0 7px rgba(155,77,170,.22),0 0 46px rgba(155,77,170,.35)}
+@media(max-width:700px){.hello>img{width:220px;height:220px;margin:0 auto}}
+/* pàgines de secció: reel + 3 targetes */
+.wrap.mid{max-width:1200px}
+.reel.ph{display:grid;place-items:center;color:#fff;font:600 1.1rem Inter,sans-serif;letter-spacing:.25em;text-transform:uppercase;background:linear-gradient(135deg,#1c1230,#3a2a55)}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:30px 0}
+.row3 .card.big{min-height:clamp(200px,26vw,360px)}
+.row3 .card.big:hover .t,.row3 .card.big:focus-visible .t{font-size:clamp(1.4rem,3vw,2.2rem)}
+@media(max-width:700px){.row3{grid-template-columns:1fr}.row3 .card.big{min-height:220px}}
+/* ===== MODE FOSC ===== */
+html.dk{--bg:#140e22;--ink:#efe9f7;--mut:#a99dba}
+html.dk body{background:var(--bg);color:var(--ink)}
+html.dk footer{background:#0c0817}
+html.dk nav a.on,html.dk nav a:hover,html.dk .soc a:hover{color:#fff}
+html.dk .tile,html.dk .card{background:linear-gradient(135deg,#2c1f40,#3a2a55)}
+html.dk .menu,html.dk .menu2{box-shadow:0 10px 30px rgba(0,0,0,.55)}
+html.dk .back{color:#d8b4fe}
+html.dk .hello>img{box-shadow:0 0 0 7px rgba(197,139,214,.22),0 0 46px rgba(197,139,214,.4)}

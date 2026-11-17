@@ -172,3 +172,10 @@ html.dk .hello>img{box-shadow:0 0 0 7px rgba(197,139,214,.22),0 0 46px rgba(197,
 .dots{display:flex}
 .arr{display:none}
 .band{display:none}
+/* ===== botons lila de la portada ===== */
+.pills{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;padding:46px 3vw}
+.pills a{display:inline-block;background:var(--pur);color:#fff;padding:20px 40px;border-radius:99px;font:700 1.1rem Inter,sans-serif;letter-spacing:.06em;text-decoration:none;text-transform:uppercase;transition:filter .2s,transform .2s}
+.pills a:hover{filter:brightness(1.15);transform:translateY(-2px)}
+@media(max-width:700px){.pills a{padding:14px 24px;font-size:.9rem}}
+/* fletxes del slider */
+.arr{display:grid}

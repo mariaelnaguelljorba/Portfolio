@@ -31,6 +31,21 @@ if(nv){
   set();nv.after(b);
 }
 
+/* ===== slider de la portada ===== */
+document.querySelectorAll('.show').forEach(w=>{
+  const sl=[...w.querySelectorAll('.sh')],dots=w.querySelector('.dots');
+  if(!sl.length)return;
+  let i=0,timer;
+  const go=k=>{i=(k+sl.length)%sl.length;sl.forEach((s,j)=>s.classList.toggle('on',j===i));if(dots)[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i))};
+  const play=()=>{clearInterval(timer);timer=setInterval(()=>go(i+1),4500)};
+  if(dots)sl.forEach((_,k)=>{const b=document.createElement('button');b.setAttribute('aria-label','Slide '+(k+1));b.onclick=()=>{go(k);play()};dots.appendChild(b)});
+  const l=w.querySelector('.arr.l'),r=w.querySelector('.arr.r');
+  if(l)l.onclick=()=>{go(i-1);play()};
+  if(r)r.onclick=()=>{go(i+1);play()};
+  w.onmouseenter=()=>clearInterval(timer);w.onmouseleave=play;
+  go(0);play();w.classList.add('ready');
+});
+
 /* ===== brillantors ===== */
 const star=(c,o)=>'url("data:image/svg+xml,'+encodeURIComponent(o
   ?`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='none' stroke='${c}' stroke-width='1.4' stroke-linejoin='round' d='M12 1Q13.2 10.8 23 12Q13.2 13.2 12 23Q10.8 13.2 1 12Q10.8 10.8 12 1Z'/></svg>`
@@ -42,29 +57,17 @@ const mk=(el,x,y,z,c,o)=>{
   s.style.cssText=`left:${x}%;top:${y}%;width:${z}px;height:${z}px;background-image:${star(c,o)};--d:${rnd(2.2,5)}s;--l:${rnd(0,4)}s`;
   el.appendChild(s);
 };
-// fons fosc: blanques, liles i blaves
 document.querySelectorAll('.hero,.show').forEach(el=>{
   const C=['#ffffff','#ffffff','#d8b4fe','#8ec5ff'];
   for(let i=0;i<20;i++)mk(el,rnd(0,98),rnd(0,92),rnd(8,30),pick(C),false);
 });
-// fons clar (Hello): estrelles de contorn als costats + petites arreu
 document.querySelectorAll('.hello-wrap').forEach(el=>{
   const C=['#9b4daa','#c58bd6','#5aa9e6'];
   for(let i=0;i<12;i++)mk(el,i%2?rnd(82,96):rnd(2,16),rnd(4,88),rnd(24,52),pick(C),true);
   for(let i=0;i<10;i++)mk(el,rnd(0,97),rnd(0,92),rnd(8,20),pick(C),false);
 });
-// slider automàtic de la portada
-document.querySelectorAll('.show').forEach(w=>{
-  const sl=[...w.querySelectorAll('.sh')],dots=w.querySelector('.dots');
-  let i=0,timer;
-  const go=k=>{i=(k+sl.length)%sl.length;sl.forEach((s,j)=>s.classList.toggle('on',j===i));if(dots)[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i))};
-  const play=()=>{clearInterval(timer);timer=setInterval(()=>go(i+1),4500)};
-  if(dots)sl.forEach((_,k)=>{const b=document.createElement('button');b.setAttribute('aria-label','Slide '+(k+1));b.onclick=()=>{go(k);play()};dots.appendChild(b)});
-  w.onmouseenter=()=>clearInterval(timer);w.onmouseleave=play;
-  go(0);play();
-});
-});
-// estela del cursor (només amb ratolí)
+
+/* ===== estela del cursor (només amb ratolí) ===== */
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&matchMedia('(hover:hover)').matches){
   let last=0;const TR=['#ffffff','#d8b4fe','#8ec5ff','#c58bd6'];
   addEventListener('mousemove',e=>{
@@ -75,7 +78,8 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&matchMedia('(hover:ho
     document.body.appendChild(s);setTimeout(()=>s.remove(),900);
   });
 }
-// aparició en fer scroll
+
+/* ===== aparició en fer scroll ===== */
 if('IntersectionObserver' in window){
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   document.querySelectorAll('.hub .card,.row3 .card,.tile,.hello>img,.hello>div').forEach(el=>{el.classList.add('rv');io.observe(el)});

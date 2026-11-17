@@ -21,3 +21,45 @@ document.querySelectorAll('.slider').forEach(s=>{
   s.querySelector('.prev').onclick=()=>t.scrollBy({left:-t.clientWidth*.8,behavior:'smooth'});
   s.querySelector('.next').onclick=()=>t.scrollBy({left:t.clientWidth*.8,behavior:'smooth'});
 });
+/* ===== brillantors, slider d'About i efectes ===== */
+const star=c=>'url("data:image/svg+xml,'+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='${c}' d='M12 0Q13 11 24 12Q13 13 12 24Q11 13 0 12Q11 11 12 0Z'/></svg>`)+'")';
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const pick=a=>a[Math.random()*a.length|0];
+// brillantors fixos que s'encenen i s'apaguen
+document.querySelectorAll('.hero,.show,.hello').forEach(el=>{
+  const dark=!el.classList.contains('hello');
+  const cols=dark?['#fff','#fff','#ffe9a8','#e6c4ff']:['#9b4daa','#c58bd6','#e0a93b'];
+  for(let i=0;i<(dark?16:9);i++){
+    const s=document.createElement('i'),z=rnd(8,30);
+    s.className='sp tw';
+    s.style.cssText=`left:${rnd(0,98)}%;top:${rnd(0,95)}%;width:${z}px;height:${z}px;background-image:${star(pick(cols))};--d:${rnd(2.2,5)}s;--l:${rnd(0,4)}s`;
+    el.appendChild(s);
+  }
+});
+// slider automàtic de la portada
+document.querySelectorAll('.show').forEach(w=>{
+  const sl=[...w.querySelectorAll('.sh')],dots=w.querySelector('.dots');
+  let i=0,timer;
+  const go=k=>{i=(k+sl.length)%sl.length;sl.forEach((s,j)=>s.classList.toggle('on',j===i));[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i))};
+  const play=()=>{clearInterval(timer);timer=setInterval(()=>go(i+1),4500)};
+  sl.forEach((_,k)=>{const b=document.createElement('button');b.setAttribute('aria-label','Slide '+(k+1));b.onclick=()=>{go(k);play()};dots.appendChild(b)});
+  w.onmouseenter=()=>clearInterval(timer);w.onmouseleave=play;
+  go(0);play();
+});
+// estela de brillantors amb el cursor (només amb ratolí)
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&matchMedia('(hover:hover)').matches){
+  let last=0;const TR=['#fff','#ffe9a8','#e6c4ff','#c58bd6'];
+  addEventListener('mousemove',e=>{
+    const now=performance.now();if(now-last<45)return;last=now;
+    const s=document.createElement('i'),z=rnd(8,20);
+    s.className='sp trail';
+    s.style.cssText=`left:${e.clientX}px;top:${e.clientY}px;width:${z}px;height:${z}px;background-image:${star(pick(TR))};--dx:${rnd(-20,20)}px;--dy:${rnd(10,40)}px`;
+    document.body.appendChild(s);setTimeout(()=>s.remove(),900);
+  });
+}
+// banda animada i aparició en fer scroll
+document.querySelectorAll('.band-in').forEach(b=>b.innerHTML+=b.innerHTML);
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.hub .card,.tile,.grid .card,.hello>*').forEach(el=>{el.classList.add('rv');io.observe(el)});
+}

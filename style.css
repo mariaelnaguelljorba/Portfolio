@@ -78,3 +78,51 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;paddin
 .menu2{list-style:none;margin:0;padding:10px 0;position:absolute;right:100%;top:0;min-width:240px;background:var(--bg);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.18);opacity:0;visibility:hidden;transition:.2s}
 .menu li.sub:hover .menu2,.menu li.sub:focus-within .menu2{opacity:1;visibility:visible}
 .menu2 a{display:block;padding:7px 18px;white-space:nowrap}
+/* ===== brillantors ===== */
+.sp{position:absolute;pointer-events:none;background-size:contain;background-repeat:no-repeat;z-index:3;filter:drop-shadow(0 0 6px rgba(255,255,255,.8))}
+.sp.tw{animation:tw var(--d,3s) ease-in-out infinite;animation-delay:var(--l,0s)}
+@keyframes tw{0%,100%{transform:scale(.25) rotate(0);opacity:.15}50%{transform:scale(1) rotate(25deg);opacity:1}}
+.sp.trail{position:fixed;z-index:9999;margin:-8px 0 0 -8px;filter:drop-shadow(0 0 4px rgba(155,77,170,.6));animation:trail .9s ease-out forwards}
+@keyframes trail{from{opacity:1;transform:translate(0,0) scale(1) rotate(0)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.2) rotate(120deg)}}
+.hello{position:relative}
+.pills{padding-bottom:28px}
+/* ===== aparició en fer scroll ===== */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+/* ===== showcase gran de la portada ===== */
+.show{position:relative;height:clamp(420px,80vh,780px);overflow:hidden;background:linear-gradient(135deg,#2a1b3d,#4a3b5c)}
+.sh{position:absolute;inset:0;display:block;color:#fff;text-decoration:none;opacity:0;visibility:hidden;transition:opacity 1s,visibility 1s}
+.sh.on{opacity:1;visibility:visible;z-index:1}
+.sh img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform 7s linear}
+.sh.on img{transform:scale(1.14)}
+.sh:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,8,25,.8),rgba(15,8,25,.05) 70%)}
+.sh .cap{position:absolute;left:6vw;bottom:16%;z-index:2;max-width:700px}
+.sh .cap span{display:block}
+.sh .n{font:700 .85rem Inter,sans-serif;letter-spacing:.35em;opacity:.8}
+.sh .ti{font:600 clamp(2.4rem,7vw,5.6rem)/1 Fraunces,Georgia,serif;margin:.15em 0 .35em;transform:translateY(34px);opacity:0;transition:transform .9s .3s,opacity .9s .3s}
+.sh.on .ti{transform:none;opacity:1}
+.sh .cap .go{display:inline-block;font:700 .85rem Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;border-bottom:2px solid #fff;padding-bottom:4px}
+.dots{position:absolute;left:0;right:0;bottom:26px;z-index:4;display:flex;justify-content:center;gap:10px}
+.dots button{width:34px;height:4px;border:0;border-radius:4px;padding:0;background:rgba(255,255,255,.4);cursor:pointer;transition:.3s}
+.dots button.on{background:#fff;width:56px}
+@media(max-width:700px){.sh .cap{left:20px;bottom:18%}}
+/* ===== banda animada ===== */
+.band{overflow:hidden;background:var(--navy);color:#fff;padding:14px 0;white-space:nowrap}
+.band-in{display:inline-block;animation:mq 30s linear infinite;font:700 .95rem Inter,sans-serif;letter-spacing:.25em;text-transform:uppercase}
+.band-in span:after{content:"✦";margin:0 1.4em;color:#c58bd6}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.sp.tw,.band-in{animation:none}}
+/* ===== targetes grans (Concept art i Projects) ===== */
+.wrap.full{max-width:none;padding-left:3vw;padding-right:3vw}
+.hub{display:grid;gap:22px;margin:24px 0}
+.card.big{min-height:clamp(240px,38vw,440px);border-radius:12px;color:#fff}
+.card.big img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .5s}
+.card.big:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(0,0,0,.6));transition:opacity .5s}
+.card.big .t{position:absolute;left:24px;right:auto;bottom:20px;padding:0;background:none;width:max-content;max-width:90%;z-index:2;font:600 clamp(1.3rem,3vw,2rem) Fraunces,Georgia,serif;text-shadow:0 2px 14px rgba(0,0,0,.6);transition:all .55s cubic-bezier(.2,.7,.2,1)}
+.card.big .d{position:absolute;left:0;right:0;top:calc(50% + 3rem);bottom:auto;padding:0 24px;text-align:center;background:none;z-index:2;font:600 .95rem Inter,sans-serif;opacity:0;transition:opacity .5s .1s}
+.card.big:hover img,.card.big:focus-visible img{transform:scale(1.08) translateX(-1%);filter:brightness(.5) saturate(1.2)}
+.card.big:hover:after{opacity:0}
+.card.big:hover .t,.card.big:focus-visible .t{left:50%;bottom:50%;transform:translate(-50%,50%);font-size:clamp(2rem,6vw,3.6rem);letter-spacing:.07em;text-transform:uppercase;text-align:center}
+.card.big:hover .d,.card.big:focus-visible .d{opacity:1}
+/* ===== resume PDF ===== */
+.pdf{display:block;width:100%;height:85vh;min-height:600px;border:0;border-radius:10px;background:#fff;margin:20px 0 10px}

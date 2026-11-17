@@ -69,3 +69,12 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;paddin
 @media(max-width:700px){.menu{display:none}}
 /* ===== reel ===== */
 .reel{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:10px;background:#000;margin:20px 0}
+/* ===== botons lila amb enllaç ===== */
+.pills a{background:var(--pur);color:#fff;padding:8px 16px;border-radius:99px;font:700 .72rem Inter,sans-serif;text-decoration:none;text-transform:uppercase;transition:filter .2s,transform .2s}
+.pills a:hover{filter:brightness(1.15);transform:translateY(-2px)}
+/* ===== submenú Concept art ===== */
+.menu li.sub{position:relative}
+.menu li.sub>a:after{content:" ‹"}
+.menu2{list-style:none;margin:0;padding:10px 0;position:absolute;right:100%;top:0;min-width:240px;background:var(--bg);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.18);opacity:0;visibility:hidden;transition:.2s}
+.menu li.sub:hover .menu2,.menu li.sub:focus-within .menu2{opacity:1;visibility:visible}
+.menu2 a{display:block;padding:7px 18px;white-space:nowrap}

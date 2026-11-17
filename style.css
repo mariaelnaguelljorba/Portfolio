@@ -165,3 +165,10 @@ html.dk .tile,html.dk .card{background:linear-gradient(135deg,#2c1f40,#3a2a55)}
 html.dk .menu,html.dk .menu2{box-shadow:0 10px 30px rgba(0,0,0,.55)}
 html.dk .back{color:#d8b4fe}
 html.dk .hello>img{box-shadow:0 0 0 7px rgba(197,139,214,.22),0 0 46px rgba(197,139,214,.4)}
+/* ===== slider com abans (sense banda negra) ===== */
+.show{height:clamp(420px,80vh,780px)}
+.sh .cap{top:auto;bottom:16%;transform:none}
+.sh .n{display:block}
+.dots{display:flex}
+.arr{display:none}
+.band{display:none}

@@ -179,3 +179,25 @@ html.dk .hello>img{box-shadow:0 0 0 7px rgba(197,139,214,.22),0 0 46px rgba(197,
 @media(max-width:700px){.pills a{padding:14px 24px;font-size:.9rem}}
 /* fletxes del slider */
 .arr{display:grid}
+/* ===== peu com a la captura ===== */
+footer{padding:38px 6vw 44px;align-items:flex-start}
+.fb{display:block;text-decoration:none;color:#1d3a73}
+.fb b{display:block;font:600 clamp(1.5rem,3vw,2.1rem)/1.2 Fraunces,Georgia,serif;transition:color .2s}
+.fb span{display:block;margin-top:2px;font-size:1.1rem;letter-spacing:.07em;text-transform:uppercase}
+.fb small{display:block;margin-top:20px;font:600 .72rem Fraunces,Georgia,serif;color:#6b6670}
+.fb:hover b{color:var(--pur)}
+.soc{gap:28px}
+.soc a{width:46px;height:46px;color:#62656b}
+.dark .fb,html.dk .fb{color:#e6d9ff}
+.dark .fb small,html.dk .fb small{color:#a99dba}
+html.dk .soc a{color:#a99dba}
+html.dk .soc a:hover{color:#fff}
+@media(max-width:700px){.soc a{width:38px;height:38px}.soc{gap:18px}}
+/* ===== botons lila més macos ===== */
+.pills{gap:18px;padding:52px 3vw}
+.pills a{position:relative;overflow:hidden;padding:18px 36px;font:700 .98rem Inter,sans-serif;letter-spacing:.1em;border:1px solid rgba(255,255,255,.22);background:linear-gradient(135deg,#b866cb,#8a3f9c);box-shadow:0 8px 24px rgba(155,77,170,.35),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.pills a:before{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);transition:left .7s}
+.pills a:hover{filter:none;transform:translateY(-5px) scale(1.05);box-shadow:0 16px 36px rgba(155,77,170,.55),0 0 0 5px rgba(197,139,214,.22)}
+.pills a:hover:before{left:130%}
+.pills a:active{transform:translateY(-1px) scale(.99)}
+@media(max-width:700px){.pills a{padding:13px 22px;font-size:.82rem}}

@@ -58,32 +58,49 @@ try{
   });
 }catch(e){console.error('slider',e)}
 
-/* ===== brillantors i estela del cursor ===== */
+/* ===== brillantors (petites, a les vores, darrere el text) ===== */
 try{
+  const mob=innerWidth<700,K=mob?.55:1;
   const star=(c,o)=>'url("data:image/svg+xml,'+encodeURIComponent(o
     ?`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='none' stroke='${c}' stroke-width='1.4' stroke-linejoin='round' d='M12 1Q13.2 10.8 23 12Q13.2 13.2 12 23Q10.8 13.2 1 12Q10.8 10.8 12 1Z'/></svg>`
     :`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='${c}' d='M12 0Q13 11 24 12Q13 13 12 24Q11 13 0 12Q11 11 12 0Z'/></svg>`)+'")';
   const rnd=(a,b)=>a+Math.random()*(b-a);
   const pick=a=>a[Math.random()*a.length|0];
-  const mk=(el,x,y,z,c,o)=>{
-    const s=document.createElement('i');s.className='sp tw';
-    s.style.cssText=`left:${x}%;top:${y}%;width:${z}px;height:${z}px;background-image:${star(c,o)};--d:${rnd(2.2,5)}s;--l:${rnd(0,4)}s`;
+  const side=(a,b,c,d)=>Math.random()<.5?rnd(a,b):rnd(c,d);
+  const put=(el,x,y,z,css,zi,cls)=>{
+    const s=document.createElement('i');s.className='sp tw'+(cls||'');
+    const px=(z*K).toFixed(1);
+    s.style.cssText=`left:${x}%;top:${y}%;width:${px}px;height:${px}px;--d:${rnd(2.2,5)}s;--l:${rnd(0,4)}s;`+css+(zi!=null?`;z-index:${zi}`:'');
     el.appendChild(s);
   };
-  document.querySelectorAll('.hero,.show').forEach(el=>{
-    const C=['#ffffff','#ffffff','#d8b4fe','#8ec5ff'];
-    for(let i=0;i<20;i++)mk(el,rnd(0,98),rnd(0,92),rnd(8,30),pick(C),false);
+  const fixedCol=(el,x,y,z,o,zi)=>put(el,x,y,z,`background-image:${star(pick(['#ffffff','#ffffff','#d8b4fe','#8ec5ff']),o)}`,zi,'');
+  const theme=(el,x,y,z,o,zi)=>put(el,x,y,z,`--m:${star('#000',o)}`,zi,' th '+pick(['a','b','c']));
+  // portada (hero): només a les vores
+  document.querySelectorAll('.hero').forEach(el=>{
+    for(let i=0;i<(mob?8:16);i++)fixedCol(el,mob?side(1,10,90,98):side(1,20,80,98),rnd(4,88),rnd(7,20),false);
   });
+  // slider: només a la part sense text
+  document.querySelectorAll('.show').forEach(el=>{
+    for(let i=0;i<(mob?6:12);i++)fixedCol(el,mob?rnd(4,94):rnd(52,97),mob?rnd(3,16):rnd(5,88),rnd(7,20),false,2);
+  });
+  // Hello: estrelles de contorn als costats
   document.querySelectorAll('.hello-wrap').forEach(el=>{
-    const C=['#9b4daa','#c58bd6','#5aa9e6'];
-    for(let i=0;i<12;i++)mk(el,i%2?rnd(82,96):rnd(2,16),rnd(4,88),rnd(24,52),pick(C),true);
-    for(let i=0;i<10;i++)mk(el,rnd(0,97),rnd(0,92),rnd(8,20),pick(C),false);
+    for(let i=0;i<(mob?6:12);i++){
+      const o=i%2===0;
+      theme(el,mob?rnd(2,94):side(1,8,92,98),mob?side(1,5,94,98):rnd(5,88),o?rnd(18,34):rnd(7,14),o);
+    }
   });
+  // la resta de pàgines: capa fixa a les vores
+  if(on!=='about'){
+    const f=document.createElement('div');f.className='bgfx';document.body.appendChild(f);
+    for(let i=0;i<(mob?8:16);i++)theme(f,mob?side(0,4,95,99):side(.5,6,94,99.5),rnd(4,94),rnd(8,22),i%3===0);
+  }
+  // estela del cursor (només amb ratolí)
   if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&matchMedia('(hover:hover)').matches){
     let last=0;const TR=['#ffffff','#d8b4fe','#8ec5ff','#c58bd6'];
     addEventListener('mousemove',e=>{
       const now=performance.now();if(now-last<45)return;last=now;
-      const s=document.createElement('i'),z=rnd(8,20);
+      const s=document.createElement('i'),z=rnd(8,18);
       s.className='sp trail';
       s.style.cssText=`left:${e.clientX}px;top:${e.clientY}px;width:${z}px;height:${z}px;background-image:${star(pick(TR),false)};--dx:${rnd(-20,20)}px;--dy:${rnd(10,40)}px`;
       document.body.appendChild(s);setTimeout(()=>s.remove(),900);

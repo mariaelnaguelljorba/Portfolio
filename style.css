@@ -247,3 +247,26 @@ header{padding:10px 3vw;border-bottom:1px solid rgba(155,77,170,.16)}
 .chips li{margin:0;padding:5px 14px;border-radius:99px;border:1px solid rgba(142,197,255,.45);color:#cfe3ff;font:600 .85rem Inter,sans-serif}
 .cv .tags{font:600 .8rem Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.8;margin:.1em 0 .8em}
 @media(max-width:800px){.cv-grid{grid-template-columns:1fr;gap:10px}.cv-side{position:static}}
+/* ===== PÀGINA DE GALERIA (Character design) ===== */
+.pg-banner{position:relative;height:clamp(150px,22vw,250px);display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,#2a1b3d,#4a3b5c);color:#fff}
+.pg-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pg-banner:after{content:"";position:absolute;inset:0;background:rgba(15,8,25,.5)}
+.pg-banner h1{position:relative;z-index:1;margin:0;font-size:clamp(2.2rem,6vw,4rem);text-shadow:0 3px 20px rgba(0,0,0,.6)}
+.cdw.alt{background:rgba(155,77,170,.09)}
+.cd{max-width:1200px;margin:0 auto;padding:46px 22px}
+.cd h2{display:inline-block;font-size:clamp(1.6rem,3.6vw,2.4rem);margin:0 0 .3em;padding-bottom:.15em;border-bottom:3px solid var(--pur)}
+.cd .sub{margin:0 0 .6em;color:var(--mut)}
+.cd .lead{margin:.4em 0 1em}
+.cd h3{font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;margin:2.2em 0 .7em;color:var(--pur)}
+html.dk .cd h3{color:#d8b4fe}
+.split{display:grid;grid-template-columns:1fr 1.5fr;gap:34px;align-items:center;margin-bottom:22px}
+.pic{margin:0 0 18px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#d9c3dc,#c7b3d6);min-height:140px}
+html.dk .pic{background:linear-gradient(135deg,#2c1f40,#3a2a55)}
+.pic img{width:100%;height:auto;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.pic:hover img{transform:scale(1.025)}
+.pic figcaption{padding:8px 12px;font-size:.85rem;color:var(--mut);background:var(--bg)}
+.pics{display:grid;gap:18px;margin-bottom:18px}
+.pics .pic{margin:0}
+.pics.c2{grid-template-columns:repeat(2,1fr)}
+.pics.c3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:800px){.split,.pics.c2,.pics.c3{grid-template-columns:1fr}}

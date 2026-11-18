@@ -201,3 +201,49 @@ html.dk .soc a:hover{color:#fff}
 .pills a:hover:before{left:130%}
 .pills a:active{transform:translateY(-1px) scale(.99)}
 @media(max-width:700px){.pills a{padding:13px 22px;font-size:.82rem}}
+/* ===== ESTRELLES: darrere del text, més petites, a les vores ===== */
+.sp.tw{z-index:0}
+.hello{z-index:1}
+main,footer{position:relative;z-index:1}
+.bgfx{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.sp.th{background:var(--c);filter:none;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+.sp.th.a{--c:#9b4daa}.sp.th.b{--c:#c58bd6}.sp.th.c{--c:#5aa9e6}
+html.dk .sp.th.a{--c:#ffffff}html.dk .sp.th.b{--c:#d8b4fe}html.dk .sp.th.c{--c:#8ec5ff}
+/* ===== ICONA DE LA CAPÇALERA ===== */
+header{padding:10px 3vw;border-bottom:1px solid rgba(155,77,170,.16)}
+.logo{display:block;flex:none}
+.logo img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--pur);box-shadow:0 0 0 4px rgba(155,77,170,.15);transition:transform .3s,box-shadow .3s}
+.logo:hover img{transform:scale(1.08) rotate(-4deg);box-shadow:0 0 0 6px rgba(155,77,170,.28),0 0 18px rgba(155,77,170,.5)}
+@media(max-width:700px){header{flex-direction:row;flex-wrap:wrap;justify-content:space-between;padding:8px 14px}.logo img{width:42px;height:42px}nav{gap:4px 14px}nav a{font-size:.95rem}}
+/* ===== TARGETES GRANS: el títol NO es mou al centre ===== */
+.card.big:before{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;z-index:2;background:linear-gradient(100deg,transparent,rgba(255,255,255,.22),transparent);transform:skewX(-20deg);transition:left .8s;pointer-events:none}
+.card.big:hover:before{left:140%}
+.card.big:hover .t,.card.big:focus-visible .t{left:24px;bottom:20px;transform:scale(1.14);transform-origin:left bottom;font-size:clamp(1.3rem,3vw,2rem);letter-spacing:0;text-transform:none;text-align:left}
+.row3 .card.big:hover .t,.row3 .card.big:focus-visible .t{font-size:clamp(1.3rem,3vw,2rem);letter-spacing:0}
+.card.big .d{top:auto;bottom:82px;left:24px;right:24px;padding:0;text-align:left;transform:translateY(8px);transition:opacity .5s .1s,transform .5s .1s}
+.card.big:hover .d,.card.big:focus-visible .d{transform:none}
+.card.big:hover img,.card.big:focus-visible img{transform:scale(1.07);filter:brightness(.62) saturate(1.15)}
+.hub.works .card.big{min-height:clamp(280px,44vw,520px)}
+/* ===== RESUME EN HTML ===== */
+.cv{max-width:1150px;margin:0 auto;padding:18px 22px 70px}
+.cv-grid{display:grid;grid-template-columns:minmax(260px,1fr) 2fr;gap:52px;margin-top:10px}
+.cv-side{position:sticky;top:90px;align-self:start}
+.cv-av{width:min(250px,60vw);aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid #8ec5ff;box-shadow:0 0 0 8px rgba(142,197,255,.12),0 0 50px rgba(142,197,255,.35);margin:0 auto 22px}
+.cv-name{font:600 clamp(1.8rem,3.4vw,2.4rem)/1.05 Fraunces,Georgia,serif;text-transform:uppercase;margin:0;color:#fff;text-align:center}
+.cv-role{text-align:center;letter-spacing:.16em;text-transform:uppercase;color:#8ec5ff;font-size:.95rem;margin:.6em 0 0}
+.cv h3{display:flex;align-items:center;gap:14px;font:600 1.45rem Fraunces,Georgia,serif;letter-spacing:.12em;text-transform:uppercase;margin:2em 0 .7em;color:#fff}
+.cv h3:before{content:"✦";color:#8ec5ff;text-shadow:0 0 10px #8ec5ff}
+.cv h3:after{content:"";flex:1;height:2px;background:linear-gradient(90deg,#8ec5ff,transparent);box-shadow:0 0 10px rgba(142,197,255,.6)}
+.cv-side h3:first-of-type{margin-top:1.6em}
+.cv a{color:#cfe3ff}.cv a:hover{color:#fff}
+.cv ul{margin:.3em 0;padding-left:1.2em}
+.cv li{margin:.25em 0}
+.cv ul.plain{list-style:none;padding:0}
+.job{margin:1.3em 0}
+.job h4{margin:0;font:700 1rem Inter,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#fff}
+.job h4:before{content:"★ ";color:#8ec5ff}
+.job .when{color:#8ec5ff;font-size:.95rem;margin:.1em 0 .3em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0!important}
+.chips li{margin:0;padding:5px 14px;border-radius:99px;border:1px solid rgba(142,197,255,.45);color:#cfe3ff;font:600 .85rem Inter,sans-serif}
+.cv .tags{font:600 .8rem Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.8;margin:.1em 0 .8em}
+@media(max-width:800px){.cv-grid{grid-template-columns:1fr;gap:10px}.cv-side{position:static}}

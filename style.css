@@ -270,3 +270,5 @@ html.dk .pic{background:linear-gradient(135deg,#2c1f40,#3a2a55)}
 .pics.c2{grid-template-columns:repeat(2,1fr)}
 .pics.c3{grid-template-columns:repeat(3,1fr)}
 @media(max-width:800px){.split,.pics.c2,.pics.c3{grid-template-columns:1fr}}
+/* sense el brillo diagonal a les targetes */
+.card.big:before{display:none}

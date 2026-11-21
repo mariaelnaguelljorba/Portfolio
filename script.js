@@ -10,7 +10,7 @@ const cl=k=>on===k?' class="on"':'';
 /* ===== capçalera ===== */
 try{
   const hd=document.getElementById('site-header');
-  if(hd)hd.outerHTML=`<header><a class="logo" href="index.html"><img src="images/avatar.png" alt="Avatar" onerror="this.remove()"></a><nav><a href="index.html"${cl('about')}>About</a><div class="dd"><a href="my-works.html"${cl('works')}>My Works</a><ul class="menu">${MENU.map(item).join('')}</ul></div><a href="projects.html"${cl('projects')}>Projects</a><a href="resume.html"${cl('resume')}>Resume</a></nav></header>`;
+  if(hd)hd.outerHTML=`<header><a class="logo" href="index.html"><img src="images/avatar.png" alt="Avatar" onerror="this.remove()"></a><nav><a href="index.html"${cl('about')}>About</a><div class="dd"><a href="my-works.html"${cl('works')}>My Works</a><ul class="menu">${MENU.map(item).join('')}</ul></div><a href="projects.html"${cl('projects')}>Projects</a><a href="commissions.html"${cl('commissions')}>Commissions</a><a href="resume.html"${cl('resume')}>Resume</a></nav></header>`;
 }catch(e){console.error('header',e)}
 
 /* ===== peu (el nom porta a About) ===== */
@@ -75,27 +75,22 @@ try{
   };
   const fixedCol=(el,x,y,z,o,zi)=>put(el,x,y,z,`background-image:${star(pick(['#ffffff','#ffffff','#d8b4fe','#8ec5ff']),o)}`,zi,'');
   const theme=(el,x,y,z,o,zi)=>put(el,x,y,z,`--m:${star('#000',o)}`,zi,' th '+pick(['a','b','c']));
-  // portada (hero): només a les vores
   document.querySelectorAll('.hero').forEach(el=>{
     for(let i=0;i<(mob?8:16);i++)fixedCol(el,mob?side(1,10,90,98):side(1,20,80,98),rnd(4,88),rnd(7,20),false);
   });
-  // slider: només a la part sense text
   document.querySelectorAll('.show').forEach(el=>{
     for(let i=0;i<(mob?6:12);i++)fixedCol(el,mob?rnd(4,94):rnd(52,97),mob?rnd(3,16):rnd(5,88),rnd(7,20),false,2);
   });
-  // Hello: estrelles de contorn als costats
   document.querySelectorAll('.hello-wrap').forEach(el=>{
     for(let i=0;i<(mob?6:12);i++){
       const o=i%2===0;
       theme(el,mob?rnd(2,94):side(1,8,92,98),mob?side(1,5,94,98):rnd(5,88),o?rnd(18,34):rnd(7,14),o);
     }
   });
-  // la resta de pàgines: capa fixa a les vores
   if(on!=='about'){
     const f=document.createElement('div');f.className='bgfx';document.body.appendChild(f);
     for(let i=0;i<(mob?8:16);i++)theme(f,mob?side(0,4,95,99):side(.5,6,94,99.5),rnd(4,94),rnd(8,22),i%3===0);
   }
-  // estela del cursor (només amb ratolí)
   if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&matchMedia('(hover:hover)').matches){
     let last=0;const TR=['#ffffff','#d8b4fe','#8ec5ff','#c58bd6'];
     addEventListener('mousemove',e=>{
@@ -112,6 +107,40 @@ try{
 try{
   if('IntersectionObserver' in window){
     const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
-    document.querySelectorAll('.hub .card,.row3 .card,.tile,.hello>img,.hello>div').forEach(el=>{el.classList.add('rv');io.observe(el)});
+    document.querySelectorAll('.hub .card,.row3 .card,.tile,.hello>img,.hello>div,.svc').forEach(el=>{el.classList.add('rv');io.observe(el)});
   }
 }catch(e){console.error('reveal',e)}
+
+/* ===== ampliar imatges en clicar ===== */
+try{
+  const sel='.cdw .pic img,.tile img,.svc .ex img';
+  let lb=null,list=[],k=0;
+  const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};
+  const go=n=>{k=(n+list.length)%list.length;const im=lb.querySelector('img');im.src=list[k].currentSrc||list[k].src;im.alt=list[k].alt||''};
+  const build=()=>{
+    lb=document.createElement('div');lb.className='lb';
+    lb.innerHTML='<button class="x" aria-label="Tancar">×</button><button class="p" aria-label="Anterior">‹</button><img alt=""><button class="n" aria-label="Següent">›</button>';
+    document.body.appendChild(lb);
+    lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('x')||e.target.tagName==='IMG')close()});
+    lb.querySelector('.p').onclick=e=>{e.stopPropagation();go(k-1)};
+    lb.querySelector('.n').onclick=e=>{e.stopPropagation();go(k+1)};
+  };
+  document.addEventListener('click',e=>{
+    const im=e.target.closest(sel);if(!im)return;
+    e.preventDefault();if(!lb)build();
+    list=[...document.querySelectorAll(sel)].filter(i=>i.naturalWidth>0);
+    k=Math.max(0,list.indexOf(im));go(k);lb.classList.add('on');document.body.style.overflow='hidden';
+  });
+  document.addEventListener('keydown',e=>{
+    if(!lb||!lb.classList.contains('on'))return;
+    if(e.key==='Escape')close();if(e.key==='ArrowLeft')go(k-1);if(e.key==='ArrowRight')go(k+1);
+  });
+}catch(e){console.error('lightbox',e)}
+
+/* ===== botons de personatge: porten a la secció i la desplegueu ===== */
+try{
+  const openFor=id=>{const el=id&&document.getElementById(id);if(!el)return;const d=el.querySelector('details.more');if(d)d.open=true};
+  document.querySelectorAll('.cnav a[href^="#"]').forEach(a=>a.addEventListener('click',()=>openFor(a.getAttribute('href').slice(1))));
+  openFor(location.hash.slice(1));
+  addEventListener('hashchange',()=>openFor(location.hash.slice(1)));
+}catch(e){console.error('details',e)}
